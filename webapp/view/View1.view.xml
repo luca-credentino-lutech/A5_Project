@@ -90,7 +90,7 @@
         <f:content>
             <Table 
                 id="tableData"
-                items="{path: '/Items'}"
+                items="{/Items}"
                 sticky="ColumnHeaders"
                 class="sapFDynamicPageAlignContent"
                 growing="true"
