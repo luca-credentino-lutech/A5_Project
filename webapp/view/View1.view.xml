@@ -1,0 +1,172 @@
+<!-- View completa: View1.view.xml -->
+<mvc:View
+    controllerName="a5ui.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    height="100%">
+    
+    <f:DynamicPage id="dynamicPageId">
+        
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Prova"/>
+                </f:heading>
+                <!-- <f:expandedContent>
+                    <Text text="Tabella con dati di esempio - {/Items/length} record presenti"/>
+                </f:expandedContent> -->
+            </f:DynamicPageTitle>
+        </f:title>
+        
+        <!-- DynamicPage Header (Filtri) -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox class="sapUiSmallMargin">
+                    <HBox wrap="Wrap" alignItems="End" class="sapUiSmallMarginBottom">
+                        
+                        <!-- Filtro Partner -->
+                        <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
+                            <Label text="Partner" labelFor="inpPartner"/>
+                            <Input 
+                                id="inpPartner"
+                                width="200px"
+                                showValueHelp="true"
+                                placeholder="Seleziona Partner"
+                                >
+                            </Input>
+                        </VBox>
+                        
+                        <!-- Filtro MATKL -->
+                        <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
+                            <Label text="MATKL" labelFor="inpMatkl"/>
+                            <Input 
+                                id="inpMatkl"
+                                width="200px"
+                                showValueHelp="true"
+                                placeholder="Seleziona MATKL"
+                                >
+                            </Input>
+                        </VBox>
+                        
+                        <!-- Filtro STATO -->
+                        <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
+                            <Label text="Stato" labelFor="inpStatus"/>
+                            <Input 
+                                id="inpStatus"
+                                width="200px"
+                                showValueHelp="true"
+                                placeholder="Seleziona Stato">
+                            </Input>
+                        </VBox>
+                        
+                        <!-- Bottone Filtra -->
+                        <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
+                            <Label text=" "/>
+                            <Button 
+                                text="Filtra"
+                                type="Emphasized"
+                                press="onFilterPress"
+                                icon="sap-icon://filter"/>
+                        </VBox>
+                        
+                        <!-- Bottone Reset -->
+                        <VBox class="sapUiSmallMarginBottom">
+                            <Label text=" "/>
+                            <Button 
+                                text="Reset"
+                                press="onResetPress"
+                                icon="sap-icon://refresh"/>
+                        </VBox>
+                        
+                    </HBox>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <!-- Contenuto DynamicPage -->
+        <f:content>
+            <Table 
+                id="tableData"
+                items="{path: '/Items'}"
+                sticky="ColumnHeaders"
+                class="sapFDynamicPageAlignContent"
+                growing="true"
+                growingThreshold="10000">
+                
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Dati: {/Items/length}" level="H2"/>
+                        <ToolbarSpacer/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                
+                <!-- Colonne -->
+                <columns>
+                    <Column width="8em">
+                        <Text text="Azione"/>
+                    </Column>
+                    <Column>
+                        <Text text="Partner"/>
+                    </Column>
+                    <Column>
+                        <Text text="MATKL"/>
+                    </Column>
+                    <Column>
+                        <Text text="Stato (QUAL_STATUS + QUAL_TEXT)"/>
+                    </Column>
+                </columns>
+                
+                <!-- Righe -->
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <!-- Azioni -->
+                            <HBox>
+                                <Button 
+                                enabled="true"
+                                    visible="true"
+                                    icon="sap-icon://display" 
+                                    type="Transparent" 
+                                    press="onDisplayPress"/>
+                                <Button 
+                                id="editButton"
+                                    icon="sap-icon://edit" 
+                                    type="Transparent" 
+                                    press="onEditPress"/>
+                                 <Button
+                                 icon="sap-icon://save" 
+                                  type="Transparent"
+                                 press="onSavePress"/>   
+                            </HBox>
+                            
+                            <!-- Partner -->
+                            <Text
+                               
+                                text="{PARTNER}"/>
+                            
+                            <!-- MATKL -->
+                            <Text text="{MATKL}"/>
+                            
+                            <!-- Stato (Dropdown) -->
+                            <Select
+                                selectedKey="{STATUS}"
+                                items="{
+                                    path: 'listModel>/ProductCollection2'
+                                }"
+                                change="onStatusChange">
+                                <core:Item 
+                                    key="{listModel>key}" 
+                                    text="{listModel>Name}" />
+                            </Select>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+        
+    </f:DynamicPage>
+    
+</mvc:View>
