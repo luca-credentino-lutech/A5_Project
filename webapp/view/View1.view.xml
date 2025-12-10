@@ -152,6 +152,7 @@
                             
                             <!-- Stato (Dropdown) -->
                             <Select
+                            id="selectStatusId"
                                 selectedKey="{STATUS}"
                                 items="{
                                     path: 'listModel>/ProductCollection2'
