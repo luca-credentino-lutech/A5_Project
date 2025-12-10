@@ -1,4 +1,3 @@
-// Controller: View1.controller.js
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel"
@@ -8,7 +7,7 @@ sap.ui.define([
     return Controller.extend("a5ui.controller.View1", {
         
         onInit: function() {
-            // JSON Model per i dati della tabella
+        
             var oTableModel = new JSONModel({
                 Items: [
                     {
@@ -33,8 +32,7 @@ sap.ui.define([
                     }
                 ]
             });
-            
-            // JSON Model per i valori delle dropdown/select
+    
             var oListModel = new JSONModel({
                 ProductCollection2: [
                     { key: "001", Name: "Prova1" },
