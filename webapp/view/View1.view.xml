@@ -6,168 +6,151 @@
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
     height="100%">
-    
+
     <f:DynamicPage id="dynamicPageId">
-        
-        <!-- DynamicPage Title -->
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Prova"/>
+                    <Title text="Prova" />
                 </f:heading>
-                <!-- <f:expandedContent>
-                    <Text text="Tabella con dati di esempio - {/Items/length} record presenti"/>
-                </f:expandedContent> -->
             </f:DynamicPageTitle>
         </f:title>
-        
         <!-- DynamicPage Header (Filtri) -->
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <VBox class="sapUiSmallMargin">
                     <HBox wrap="Wrap" alignItems="End" class="sapUiSmallMarginBottom">
-                        
+
                         <!-- Filtro Partner -->
                         <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
-                            <Label text="Partner" labelFor="inpPartner"/>
-                            <Input 
+                            <Label text="Partner" labelFor="inpPartner" class ="sapUiTinyMargin" />
+                            <MultiInput
+                            class ="sapUiTinyMargin"
                                 id="inpPartner"
                                 width="200px"
                                 showValueHelp="true"
                                 placeholder="Seleziona Partner"
-                                >
-                            </Input>
+                                valueHelpRequest="onValueHelpRequest"
+                            >
+                            </MultiInput>
                         </VBox>
-                        
+
                         <!-- Filtro MATKL -->
                         <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
-                            <Label text="MATKL" labelFor="inpMatkl"/>
-                            <Input 
+                            <Label text="MATKL" labelFor="inpMatkl" class ="sapUiTinyMargin" />
+                            <MultiInput class ="sapUiTinyMargin"
                                 id="inpMatkl"
                                 width="200px"
                                 showValueHelp="true"
                                 placeholder="Seleziona MATKL"
-                                >
-                            </Input>
+                                valueHelpRequest="onValueHelpRequest2"
+                            >
+                            </MultiInput>
                         </VBox>
-                        
-                        <!-- Filtro STATO -->
-                        <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
-                            <Label text="Stato" labelFor="inpStatus"/>
-                            <Input 
-                                id="inpStatus"
-                                width="200px"
-                                showValueHelp="true"
-                                placeholder="Seleziona Stato">
-                            </Input>
-                        </VBox>
-                        
+
                         <!-- Bottone Filtra -->
                         <VBox class="sapUiTinyMarginEnd sapUiSmallMarginBottom">
-                            <Label text=" "/>
-                            <Button 
+                       
+                            <Button class ="sapUiTinyMargin"
                                 text="Filtra"
                                 type="Emphasized"
                                 press="onFilterPress"
-                                icon="sap-icon://filter"/>
+                                icon="sap-icon://filter" />
                         </VBox>
-                        
+
                         <!-- Bottone Reset -->
                         <VBox class="sapUiSmallMarginBottom">
-                            <Label text=" "/>
-                            <Button 
+                            
+                            <Button class ="sapUiTinyMargin"
                                 text="Reset"
                                 press="onResetPress"
-                                icon="sap-icon://refresh"/>
+                                icon="sap-icon://refresh" />
                         </VBox>
-                        
+
                     </HBox>
                 </VBox>
             </f:DynamicPageHeader>
         </f:header>
-        
+
         <!-- Contenuto DynamicPage -->
         <f:content>
-            <Table 
+            <Table
                 id="tableData"
-                items="{/Items}"
+                items="{tableModel>/Items}"
                 sticky="ColumnHeaders"
                 class="sapFDynamicPageAlignContent"
                 growing="true"
                 growingThreshold="10000">
-                
+
                 <headerToolbar>
                     <OverflowToolbar>
-                        <Title text="Dati: {/Items/length}" level="H2"/>
-                        <ToolbarSpacer/>
+                        <Title text="Dati: {tableModel>/Items/length}" level="H2" />
+                        <ToolbarSpacer />
                     </OverflowToolbar>
                 </headerToolbar>
-                
+
                 <!-- Colonne -->
                 <columns>
                     <Column width="8em">
-                        <Text text="Azione"/>
+                        <Text text="Azione" />
                     </Column>
                     <Column>
-                        <Text text="Partner"/>
+                        <Text text="Partner" />
                     </Column>
                     <Column>
-                        <Text text="MATKL"/>
+                        <Text text="MATKL" />
                     </Column>
                     <Column>
-                        <Text text="Stato (QUAL_STATUS + QUAL_TEXT)"/>
+                        <Text text="Stato (QUAL_STATUS + QUAL_TEXT)" />
                     </Column>
                 </columns>
-                
+
                 <!-- Righe -->
                 <items>
                     <ColumnListItem>
                         <cells>
-                            <!-- Azioni -->
+
                             <HBox>
-                                <Button 
-                                enabled="true"
+                                <Button
+                                    enabled="true"
                                     visible="true"
-                                    icon="sap-icon://display" 
-                                    type="Transparent" 
-                                    press="onDisplayPress"/>
-                                <Button 
-                                id="editButton"
-                                    icon="sap-icon://edit" 
-                                    type="Transparent" 
-                                    press="onEditPress"/>
-                                 <Button
-                                 icon="sap-icon://save" 
-                                  type="Transparent"
-                                 press="onSavePress"/>   
+                                    icon="sap-icon://display"
+                                    type="Transparent"
+                                    press="onDisplayPress" />
+                                <Button
+                                    id="editButton"
+                                    icon="sap-icon://edit"
+                                    type="Transparent"
+                                    press="onEditPress" />
+                                <Button
+                                    icon="sap-icon://save"
+                                    type="Transparent"
+                                    press="onSavePress" />
                             </HBox>
-                            
-                            <!-- Partner -->
-                            <Text
-                               
-                                text="{PARTNER}"/>
-                            
-                            <!-- MATKL -->
-                            <Text text="{MATKL}"/>
-                            
-                            <!-- Stato (Dropdown) -->
+
+                            <Text  text="{tableModel>PARTNER}" />
+
+                            <Text text="{tableModel>MATKL}" />
+
                             <Select
-                            id="selectStatusId"
-                                selectedKey="{STATUS}"
+                                id="selectStatusId"
+                                selectedKey="{tableModel>STATUS}"
                                 items="{
-                                    path: 'listModel>/ProductCollection2'
-                                }"
+                    path: 'listModel>/ProductCollection2'
+                }"
                                 change="onStatusChange">
-                                <core:Item 
-                                    key="{listModel>key}" 
+                                <core:Item
+                                    key="{listModel>key}"
                                     text="{listModel>Name}" />
                             </Select>
+
                         </cells>
                     </ColumnListItem>
                 </items>
+
             </Table>
         </f:content>
-        
+
     </f:DynamicPage>
-    
+
 </mvc:View>

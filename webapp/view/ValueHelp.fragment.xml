@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core">
+<Dialog contentHeight="30rem" draggable="true" contentWidth="30rem" title="Dati" >
+  <content>
+    <Table id="partnerTable" mode="MultiSelect" items="{tableModel>/Items}">
+      <columns>
+        <Column>
+          <Text text="Partner"/>
+        </Column>
+      </columns>
+      <items>
+        <ColumnListItem>
+          <cells>
+            <Text text="{tableModel>PARTNER}"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </content>
+  <endButton>
+
+    <Button  icon="sap-icon://accept" press="handleCloseDialog"/>
+  </endButton>
+</Dialog>
+
+</core:FragmentDefinition>
